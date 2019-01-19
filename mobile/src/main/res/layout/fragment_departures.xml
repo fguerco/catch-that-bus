@@ -5,8 +5,20 @@
                                              android:id="@+id/constraintLayout"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
-                                             tools:context=".MainFragment">
+                                             tools:context=".DeparturesFragment">
 
+    <TextView
+            android:id="@+id/route_name"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"/>
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/departures_list_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--
     <TextView
             android:id="@+id/section_label"
             android:layout_width="wrap_content"
@@ -19,5 +31,6 @@
             tools:layout_constraintLeft_creator="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout"/>
+    -->
 
 </android.support.constraint.ConstraintLayout>

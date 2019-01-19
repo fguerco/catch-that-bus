@@ -1,5 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE resources [
+    <!ENTITY barrabali_centro "Barra Bali > Centro">
+    <!ENTITY centro_barrabali "Centro > Barra Bali">
+]>
+
 <resources>
-    <string name="app_name">Catch that bus</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="app_name">Não perca o ônibus</string>
+    <string name="action_settings">Configurações</string>
+    <string name="section_format">Olá da página: %1$d</string>
+
+    <string name="BARRA_BALI_CENTRO_VIA_ZONA_SUL">&barrabali_centro; via Zona Sul</string>
+    <string name="BARRA_BALI_CENTRO_VIA_L_AMARELA">&barrabali_centro; via Linha Amarela</string>
+    <string name="BARRA_BALI_CENTRO_VIA_TIJUCA">&barrabali_centro; via Tijuca</string>
+    <string name="BARRA_BALI_CENTRO_VIA_ZONA_SUL_L_AMARELA_ESPECIAL">&barrabali_centro; Via Z. Sul / L. Amarela (Especial)</string>
+    <string name="CENTRO_BARRA_BALI_VIA_ZONA_SUL">&centro_barrabali; via Zona Sul</string>
+    <string name="CENTRO_BARRA_BALI_VIA_L_AMARELA">&centro_barrabali; via Linha Amarela</string>
+    <string name="CENTRO_BARRA_BALI_VIA_TIJUCA">&centro_barrabali; via Tijuca</string>
+    <string name="CENTRO_BARRA_BALI_VIA_JD_BOTANICO">&centro_barrabali; via Jardim Botânico</string>
+    <string name="CIRCULAR_BARRA">Circular Barra</string>
+    <string name="CIRCULAR_RECREIO">Circular Recreio</string>
 </resources>

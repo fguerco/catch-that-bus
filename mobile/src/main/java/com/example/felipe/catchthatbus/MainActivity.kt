@@ -7,38 +7,25 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.felipe.catchthatbus.departures.departuresFromAllAvailableRoutes
+import com.example.felipe.catchthatbus.departures.distinctRoutes
 import kotlinx.android.synthetic.main.activity_main.container
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import java.time.DayOfWeek
 
 class MainActivity : AppCompatActivity() {
 
-    /**
-     * The [android.support.v4.view.PagerAdapter] that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * [android.support.v4.app.FragmentStatePagerAdapter].
-     */
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+    private val departures = DayOfWeek.MONDAY.departuresFromAllAvailableRoutes(0)  // departuresFromAllAvailableRoutes()
+    private val routes = departures.distinctRoutes()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
-        container.adapter = mSectionsPagerAdapter
-
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-
+        container.adapter = SectionsPagerAdapter(supportFragmentManager)
     }
 
 
@@ -70,10 +57,12 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a MainFragment (defined as a static inner class below).
-            return MainFragment.newInstance(position + 1)
+            // Return a DeparturesFragment (defined as a static inner class below).
+            return DeparturesFragment.newInstance(routes[position], departures)
         }
 
-        override fun getCount() = 3
+        override fun getCount(): Int {
+            return routes.size
+        }
     }
 }

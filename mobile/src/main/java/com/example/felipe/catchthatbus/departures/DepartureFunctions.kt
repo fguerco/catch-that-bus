@@ -4,6 +4,7 @@ import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.util.Calendar
 
 fun BusRoute.nextDepartures(day: DayOfWeek, time: Int): List<BusDeparture> {
     return allSchedules
@@ -16,10 +17,12 @@ fun BusRoute.nextDepartures(day: DayOfWeek, time: Int): List<BusDeparture> {
 }
 
 fun BusRoute.nextDepartures(startingFrom: Instant): List<BusDeparture> {
-    val localTime = LocalDateTime.ofInstant(startingFrom, ZoneId.systemDefault())
-    val time = localTime.hour * 100 + localTime.minute
-    return nextDepartures(DayOfWeek.from(localTime), time)
+    return LocalDateTime.ofInstant(startingFrom, ZoneId.systemDefault()).let {
+        nextDepartures(DayOfWeek.from(it), it.toTime())
+    }
 }
+
+fun BusRoute.nextDeparturesToday() = nextDepartures(Calendar.getInstance().toInstant())
 
 fun DayOfWeek.departuresFromAllAvailableRoutes(time: Int): List<BusDeparture> {
     return allSchedules
@@ -31,3 +34,20 @@ fun DayOfWeek.departuresFromAllAvailableRoutes(time: Int): List<BusDeparture> {
         }
         .toList()
 }
+
+fun departuresFromAllAvailableRoutes(): List<BusDeparture> {
+    return Calendar.getInstance().toLocalDateTime().let {
+        DayOfWeek.from(it).departuresFromAllAvailableRoutes(it.toTime())
+    }
+}
+
+fun List<BusDeparture>.distinctRoutes(): List<BusRoute> {
+    return asSequence()
+        .map { it.route }
+        .distinct()
+        .toList()
+}
+
+fun LocalDateTime.toTime() = hour * 100 + minute
+fun Calendar.toLocalDateTime() = LocalDateTime.ofInstant(toInstant(), ZoneId.systemDefault())
+fun Calendar.toTime() = toLocalDateTime().toTime()
