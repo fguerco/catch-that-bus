@@ -7,7 +7,7 @@
             android:id="@+id/departure_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/DefaultText"
             android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
-            android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft" />
+            android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft"
+            android:textSize="18sp"/>
 </LinearLayout>
