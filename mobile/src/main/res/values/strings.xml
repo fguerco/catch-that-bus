@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <!DOCTYPE resources [
-    <!ENTITY barrabali_centro "Barra Bali - Centro">
-    <!ENTITY centro_barrabali "Centro - Barra Bali">
+    <!ENTITY barrabali_centro "Barra Bali x Centro">
+    <!ENTITY centro_barrabali "Centro x Barra Bali">
 ]>
 
 <resources>
-    <string name="app_name">Não perca o ônibus</string>
+    <string name="app_name">Ônibus Barra Bali</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh">Atualizar</string>
+    <string name="next_departures">Próximos horários</string>
 
     <string name="BARRA_BALI_CENTRO_VIA_ZONA_SUL">&barrabali_centro; via Zona Sul</string>
     <string name="BARRA_BALI_CENTRO_VIA_L_AMARELA">&barrabali_centro; via Linha Amarela</string>
     <string name="BARRA_BALI_CENTRO_VIA_TIJUCA">&barrabali_centro; via Tijuca</string>
-    <string name="BARRA_BALI_CENTRO_VIA_ZONA_SUL_L_AMARELA_ESPECIAL">&barrabali_centro; Via Z. Sul / L. Amarela (Especial)</string>
+    <string name="BARRA_BALI_CENTRO_VIA_ZONA_SUL_L_AMARELA_ESPECIAL">&barrabali_centro; via Z. Sul / L. Amarela (Especial)</string>
     <string name="CENTRO_BARRA_BALI_VIA_ZONA_SUL">&centro_barrabali; via Zona Sul</string>
     <string name="CENTRO_BARRA_BALI_VIA_L_AMARELA">&centro_barrabali; via Linha Amarela</string>
     <string name="CENTRO_BARRA_BALI_VIA_TIJUCA">&centro_barrabali; via Tijuca</string>

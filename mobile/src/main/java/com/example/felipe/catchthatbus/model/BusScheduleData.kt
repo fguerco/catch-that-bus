@@ -1,4 +1,4 @@
-package com.example.felipe.catchthatbus.departures
+package com.example.felipe.catchthatbus.model
 
 import java.time.DayOfWeek
 
@@ -8,7 +8,7 @@ val onlySaturday = listOf(DayOfWeek.SATURDAY)
 val scheduleCentroViaZonaSul =
     BusSchedule(BusRoute.BARRA_BALI_CENTRO_VIA_ZONA_SUL,
                 weekdays,
-                listOf(540, 625, 705, 715, 820, 1000, 1200, 1300, 1700, 1850, 2000))
+                listOf(540, 625, 650, 710, 740, 820, 1000, 1200, 1300, 1700, 1850, 2000))
 
 val scheduleCentroViaLinhaAmarela =
     BusSchedule(BusRoute.BARRA_BALI_CENTRO_VIA_L_AMARELA,
@@ -19,11 +19,6 @@ val scheduleCentroViaTijuca =
     BusSchedule(BusRoute.BARRA_BALI_CENTRO_VIA_TIJUCA,
                 weekdays,
                 listOf(730, 1600))
-
-val scheduleCentroZonaSulEspecial =
-    BusSchedule(BusRoute.BARRA_BALI_CENTRO_VIA_ZONA_SUL_L_AMARELA_ESPECIAL,
-                weekdays,
-                listOf(650))
 
 val scheduleBarraBaliViaZonaSul =
     BusSchedule(BusRoute.CENTRO_BARRA_BALI_VIA_ZONA_SUL,
@@ -48,7 +43,8 @@ val scheduleBarraBaliViaJdBotanico =
 val scheduleCircularBarraWeekdays =
     BusSchedule(BusRoute.CIRCULAR_BARRA,
                 weekdays,
-                listOf(650, 810, 920, 1050, 1240, 1400, 1600, 1800))
+                listOf(700, 805, 920, 1050, 1240, 1400, 1600, 1800))
+
 val scheduleCircularBarraSaturday =
     BusSchedule(BusRoute.CIRCULAR_BARRA,
                 onlySaturday,
@@ -67,7 +63,6 @@ val scheduleCircularRecreioSaturday =
 val allSchedules = listOf(scheduleCentroViaZonaSul,
                           scheduleCentroViaLinhaAmarela,
                           scheduleCentroViaTijuca,
-                          scheduleCentroZonaSulEspecial,
                           scheduleBarraBaliViaZonaSul,
                           scheduleBarraBaliViaLinhaAmarela,
                           scheduleBarraBaliViaTijuca,

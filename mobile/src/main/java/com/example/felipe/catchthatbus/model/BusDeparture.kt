@@ -1,7 +1,5 @@
-package com.example.felipe.catchthatbus.departures
+package com.example.felipe.catchthatbus.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import java.io.Serializable
 
 data class BusDeparture(val route: BusRoute, val time: Int) : Serializable {

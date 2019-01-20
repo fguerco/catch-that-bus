@@ -13,37 +13,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbar)
+        loadFragment()
+    }
 
+    private fun loadFragment() {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, DeparturesFragment())
             .commit()
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-        return when (item.itemId) {
-            R.id.menu_refresh -> refresh()
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun refresh(): Boolean {
-        supportFragmentManager.fragments.filterIsInstance<DeparturesFragment>().first().refresh()
-        //(fragment_departures as DeparturesFragment).refresh()
-        return true
-    }
-
 }

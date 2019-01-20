@@ -1,4 +1,4 @@
-package com.example.felipe.catchthatbus.departures
+package com.example.felipe.catchthatbus.model
 
 import com.example.felipe.catchthatbus.R
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.felipe.catchthatbus.R
-import com.example.felipe.catchthatbus.departures.BusDeparture
+import com.example.felipe.catchthatbus.model.BusDeparture
 import kotlinx.android.synthetic.main.departures_view_holder.view.departure_time
 
 class DeparturesRecyclerViewAdapter(dataset: List<BusDeparture>) :
