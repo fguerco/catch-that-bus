@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import com.example.felipe.catchthatbus.R
 import com.example.felipe.catchthatbus.departures.allDepartures
 import com.example.felipe.catchthatbus.departures.distinctRoutes
+import kotlinx.android.synthetic.main.fragment_departures.departures_refresh
+import kotlinx.android.synthetic.main.fragment_departures.routes_recycler_view
+import kotlinx.android.synthetic.main.fragment_departures.view.departures_refresh
 import kotlinx.android.synthetic.main.fragment_departures.view.routes_recycler_view
 import java.util.Calendar
 
@@ -20,10 +23,20 @@ class DeparturesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_departures, container, false).apply {
             routes_recycler_view.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = RoutesRecyclerViewAdapter(Calendar.getInstance().allDepartures().distinctRoutes())
+                adapter = RoutesRecyclerViewAdapter(getData())
             }
+
+            departures_refresh.setOnRefreshListener(::refresh)
         }
     }
 
-    fun refresh() {} // = (departures_list_view.expandableListAdapter as DeparturesListAdapter).refresh()
+    fun refresh() {
+        (routes_recycler_view.adapter as RoutesRecyclerViewAdapter).apply {
+            clear()
+            putItems(getData())
+        }
+        departures_refresh.isRefreshing = false
+    }
+
+    private fun getData() = Calendar.getInstance().allDepartures().distinctRoutes()
 }

@@ -16,10 +16,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        // Set up the ViewPager with the sections adapter.
-        //container.adapter = SectionsPagerAdapter(supportFragmentManager)
-        //departures_fragment_layout.fragmentManager
-
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, DeparturesFragment())
@@ -39,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
 
         return when (item.itemId) {
-            R.id.action_settings -> true
-            R.id.action_refresh -> refresh()
+            R.id.menu_refresh -> refresh()
             else -> super.onOptionsItemSelected(item)
         }
     }
