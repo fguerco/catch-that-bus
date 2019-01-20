@@ -1,10 +1,11 @@
-package com.example.felipe.catchthatbus
+package com.example.felipe.catchthatbus.ui.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.fragment_departures
+import com.example.felipe.catchthatbus.R
+import com.example.felipe.catchthatbus.ui.departures.DeparturesFragment
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,11 @@ class MainActivity : AppCompatActivity() {
         // Set up the ViewPager with the sections adapter.
         //container.adapter = SectionsPagerAdapter(supportFragmentManager)
         //departures_fragment_layout.fragmentManager
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_container, DeparturesFragment())
+            .commit()
     }
 
 
@@ -40,7 +46,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refresh(): Boolean {
-        (fragment_departures as DeparturesFragment).refresh()
+        supportFragmentManager.fragments.filterIsInstance<DeparturesFragment>().first().refresh()
+        //(fragment_departures as DeparturesFragment).refresh()
         return true
     }
 

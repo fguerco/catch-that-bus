@@ -21,11 +21,9 @@ android {
 
     sourceSets["main"].java.srcDir("build/generated")
 
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
+    buildTypes["release"].apply {
+        isMinifyEnabled = false
+        proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
 }
 
@@ -38,6 +36,7 @@ dependencies {
     ))
     implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     implementation("com.android.support:appcompat-v7:$androidVersion")
+    implementation("com.android.support:recyclerview-v7:$androidVersion")
     implementation("com.android.support:design:$androidVersion")
     implementation("com.android.support.constraint:constraint-layout:1.1.3")
     implementation("com.android.support:support-annotations:$androidVersion")
