@@ -29,10 +29,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-            android:id="@+id/container"
+    <fragment
+            android:id="@+id/fragment_departures"
+            android:name="com.example.felipe.catchthatbus.DeparturesFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:layout="@layout/fragment_departures" />
+
 
 </android.support.design.widget.CoordinatorLayout>

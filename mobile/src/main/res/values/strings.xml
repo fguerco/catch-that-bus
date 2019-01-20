@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <!DOCTYPE resources [
-    <!ENTITY barrabali_centro "Barra Bali > Centro">
-    <!ENTITY centro_barrabali "Centro > Barra Bali">
+    <!ENTITY barrabali_centro "Barra Bali - Centro">
+    <!ENTITY centro_barrabali "Centro - Barra Bali">
 ]>
 
 <resources>
     <string name="app_name">Não perca o ônibus</string>
     <string name="action_settings">Configurações</string>
-    <string name="section_format">Olá da página: %1$d</string>
+    <string name="action_refresh">Atualizar</string>
 
     <string name="BARRA_BALI_CENTRO_VIA_ZONA_SUL">&barrabali_centro; via Zona Sul</string>
     <string name="BARRA_BALI_CENTRO_VIA_L_AMARELA">&barrabali_centro; via Linha Amarela</string>

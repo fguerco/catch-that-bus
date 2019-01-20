@@ -22,9 +22,7 @@ fun BusRoute.nextDepartures(startingFrom: Instant): List<BusDeparture> {
     }
 }
 
-fun BusRoute.nextDeparturesToday() = nextDepartures(Calendar.getInstance().toInstant())
-
-fun DayOfWeek.departuresFromAllAvailableRoutes(time: Int): List<BusDeparture> {
+fun DayOfWeek.allDepartures(time: Int): List<BusDeparture> {
     return allSchedules
         .filter { it.days.contains(this) }
         .flatMap { schedule ->
@@ -35,9 +33,9 @@ fun DayOfWeek.departuresFromAllAvailableRoutes(time: Int): List<BusDeparture> {
         .toList()
 }
 
-fun departuresFromAllAvailableRoutes(): List<BusDeparture> {
-    return Calendar.getInstance().toLocalDateTime().let {
-        DayOfWeek.from(it).departuresFromAllAvailableRoutes(it.toTime())
+fun Calendar.allDepartures(): List<BusDeparture> {
+    return toLocalDateTime().let {
+        DayOfWeek.from(it).allDepartures(it.toTime())
     }
 }
 
@@ -50,4 +48,3 @@ fun List<BusDeparture>.distinctRoutes(): List<BusRoute> {
 
 fun LocalDateTime.toTime() = hour * 100 + minute
 fun Calendar.toLocalDateTime() = LocalDateTime.ofInstant(toInstant(), ZoneId.systemDefault())
-fun Calendar.toTime() = toLocalDateTime().toTime()

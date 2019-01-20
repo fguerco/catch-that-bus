@@ -97,7 +97,7 @@ internal class BusScheduleTest {
         inner class `and time is 1200` {
             private val time = 1200
 
-            private val subject = day.departuresFromAllAvailableRoutes(time)
+            private val subject = day.allDepartures(time)
 
             @Test
             internal fun `departuresFromAllAvailableRoutes() should return 3 items`() {
