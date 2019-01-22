@@ -15,9 +15,7 @@ class GridVerticalAutofitLayoutManager(
 ) : GridLayoutManager(context, 1, LinearLayoutManager.VERTICAL, reverseLayout) {
 
     private val defaultWidth by lazy {
-        TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, 48f, context.resources.displayMetrics
-        ).toInt()
+        48f.asPixel
     }
 
     private var widthChanged = true
@@ -46,4 +44,9 @@ class GridVerticalAutofitLayoutManager(
 
         super.onLayoutChildren(recycler, state)
     }
+
+    private val Float.asPixel get() =
+        TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, this, context.resources.displayMetrics
+        ).toInt()
 }

@@ -1,5 +1,6 @@
 package com.example.felipe.catchthatbus.ui.departures
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,10 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>) :
             holder.route.text = holder.itemView.context.getText(it.resId)
             holder.recyclerView.apply {
                 adapter = DeparturesRecyclerViewAdapter(repository.departuresToday(it))
-                layoutManager = GridVerticalAutofitLayoutManager(holder.itemView.context, 167)
+                holder.itemView.context.apply {
+                    layoutManager = GridVerticalAutofitLayoutManager(this, departuresTextViewWidth)
+                }
+
                 setRecycledViewPool(viewPool)
             }
         }
@@ -48,6 +52,8 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>) :
         data.addAll(items)
         notifyDataSetChanged()
     }
+
+    private val Context.departuresTextViewWidth get() = resources.getDimension(R.dimen.departure_text_view_width).toInt()
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val recyclerView = item.departures_recycler_view
