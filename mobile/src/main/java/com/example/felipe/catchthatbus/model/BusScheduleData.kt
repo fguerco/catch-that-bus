@@ -1,9 +1,10 @@
 package com.example.felipe.catchthatbus.model
 
-import java.time.DayOfWeek
+import java.util.Calendar
 
-val weekdays = listOf(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY)
-val onlySaturday = listOf(DayOfWeek.SATURDAY)
+
+val weekdays = listOf(Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY, Calendar.FRIDAY)
+val onlySaturday = listOf(Calendar.SATURDAY)
 
 val scheduleCentroViaZonaSul =
     BusSchedule(BusRoute.BARRA_BALI_CENTRO_VIA_ZONA_SUL,

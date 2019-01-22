@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import java.time.DayOfWeek
 import java.util.Calendar
 
 @Suppress("ClassName")
@@ -20,11 +19,11 @@ internal class BusScheduleTest {
 
         @Nested
         inner class `and the time is 17-1-2018 1430` {
-            private val instant = Calendar.getInstance().apply {
+            private val date = Calendar.getInstance().apply {
                 set(2018, Calendar.JANUARY, 17, 14, 30)
             }
 
-            private val subject = data.nextDepartures(route, instant).toList()
+            private val subject = data.nextDepartures(route, date).toList()
 
             @Test
             internal fun `nextDepartures() should list 4 departures`() {
@@ -67,7 +66,7 @@ internal class BusScheduleTest {
         @Nested
         inner class `and Day is monday` {
 
-            private val day = DayOfWeek.MONDAY
+            private val day = Calendar.MONDAY
 
             @Nested
             inner class `and time is 1430` {
@@ -92,7 +91,7 @@ internal class BusScheduleTest {
 
     @Nested
     inner class `Given day of week is saturday` {
-        private val day = DayOfWeek.SATURDAY
+        private val day = Calendar.SATURDAY
 
         @Nested
         inner class `and time is 1200` {

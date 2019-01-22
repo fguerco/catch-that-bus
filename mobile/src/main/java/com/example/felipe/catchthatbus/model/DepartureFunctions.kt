@@ -1,11 +1,8 @@
 package com.example.felipe.catchthatbus.model
 
-import java.time.DayOfWeek
-import java.time.LocalDateTime
-import java.time.ZoneId
 import java.util.Calendar
 
-fun Sequence<BusSchedule>.nextDepartures(route: BusRoute, day: DayOfWeek, time: Int): Sequence<BusDeparture> {
+fun Sequence<BusSchedule>.nextDepartures(route: BusRoute, day: Int, time: Int): Sequence<BusDeparture> {
     return filter { it.route == route }
         .filter { it.days.contains(day) }
         .flatMap { it.departures.asSequence() }
@@ -14,12 +11,10 @@ fun Sequence<BusSchedule>.nextDepartures(route: BusRoute, day: DayOfWeek, time: 
 }
 
 fun Sequence<BusSchedule>.nextDepartures(route: BusRoute, startingFrom: Calendar): Sequence<BusDeparture> {
-    return startingFrom.toLocalDateTime().let {
-        nextDepartures(route, DayOfWeek.from(it), it.toTime())
-    }
+    return nextDepartures(route, startingFrom.dayOfWeek, startingFrom.intTime)
 }
 
-fun Sequence<BusSchedule>.allDepartures(day: DayOfWeek, time: Int): Sequence<BusDeparture> {
+fun Sequence<BusSchedule>.allDepartures(day: Int, time: Int): Sequence<BusDeparture> {
     return filter { it.days.contains(day) }
         .flatMap { schedule ->
             schedule.departures.asSequence()
@@ -28,11 +23,7 @@ fun Sequence<BusSchedule>.allDepartures(day: DayOfWeek, time: Int): Sequence<Bus
         }
 }
 
-fun Sequence<BusSchedule>.allDepartures(date: Calendar): Sequence<BusDeparture> {
-    return date.toLocalDateTime().let {
-        allDepartures(DayOfWeek.from(it), it.toTime())
-    }
-}
+fun Sequence<BusSchedule>.allDepartures(startingFrom: Calendar) = allDepartures(startingFrom.dayOfWeek, startingFrom.intTime)
 
-fun LocalDateTime.toTime() = hour * 100 + minute
-fun Calendar.toLocalDateTime() = LocalDateTime.ofInstant(toInstant(), ZoneId.systemDefault())
+val Calendar.intTime get() = get(Calendar.HOUR_OF_DAY) * 100 + get(Calendar.MINUTE)
+val Calendar.dayOfWeek get() = get(Calendar.DAY_OF_WEEK)
