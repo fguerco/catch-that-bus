@@ -13,24 +13,25 @@ import kotlinx.android.synthetic.main.fragment_departures.departures_refresh
 import kotlinx.android.synthetic.main.fragment_departures.routes_recycler_view
 import kotlinx.android.synthetic.main.fragment_departures.view.departures_refresh
 import kotlinx.android.synthetic.main.fragment_departures.view.routes_recycler_view
+import java.util.Calendar
+import java.util.GregorianCalendar
 
-const val TODAY_ONLY = "todayOnly"
+const val DATE = "date"
 
 class DeparturesFragment : Fragment() {
 
     private val repository by lazy { Services.departureRepository }
     private val recyclerViewAdater by lazy { routes_recycler_view.adapter as RoutesRecyclerViewAdapter }
 
-    private var todayOnly = false
+    private var date: Calendar = arguments?.getSerializable(DATE) as? Calendar ?: GregorianCalendar()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        todayOnly = arguments.todayOnly
 
         return inflater.inflate(R.layout.fragment_departures, container, false).apply {
             routes_recycler_view.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = RoutesRecyclerViewAdapter(fetchData(), todayOnly)
+                adapter = RoutesRecyclerViewAdapter(fetchData())
             }
 
             departures_refresh.setOnRefreshListener(::refresh)
@@ -47,6 +48,7 @@ class DeparturesFragment : Fragment() {
 
     private fun refresh() {
         departures_refresh.isRefreshing = true
+        date = GregorianCalendar()
         recyclerViewAdater.apply {
             clear()
             putItems(fetchData())
@@ -54,7 +56,6 @@ class DeparturesFragment : Fragment() {
         departures_refresh.isRefreshing = false
     }
 
-    private fun fetchData() = if (todayOnly) repository.routesToday() else repository.allRoutes()
+    private fun fetchData() = repository.routesOf(date)
 
-    private val Bundle?.todayOnly get() = this?.getBoolean(TODAY_ONLY) ?: true
 }

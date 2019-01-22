@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.felipe.catchthatbus.R
-import com.example.felipe.catchthatbus.model.BusDeparture
 import kotlinx.android.synthetic.main.departures_view_holder.view.departure_time
+import java.util.Calendar
+import java.util.GregorianCalendar
 
-class DeparturesRecyclerViewAdapter(dataset: List<BusDeparture>) :
+class DeparturesRecyclerViewAdapter(dataset: List<Int>) :
         RecyclerView.Adapter<DeparturesRecyclerViewAdapter.ViewHolder>() {
 
     private val data = dataset.toMutableList()
+    private val today = GregorianCalendar()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         LayoutInflater.from(parent.context)
@@ -20,7 +22,10 @@ class DeparturesRecyclerViewAdapter(dataset: List<BusDeparture>) :
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.departureTime.text = data[position].prettyTime()
+        holder.departureTime.text = data[position].prettyTime
+
+        if (today.isAfter(data[position]))
+            holder.departureTime.setTextAppearance(R.style.text_unavailable_time)
     }
 
     override fun getItemCount() = data.size
@@ -30,10 +35,16 @@ class DeparturesRecyclerViewAdapter(dataset: List<BusDeparture>) :
         notifyDataSetChanged()
     }
 
-    fun putItems(items: List<BusDeparture>) {
+    fun putItems(items: List<Int>) {
         data.addAll(items)
         notifyDataSetChanged()
     }
+
+    private val Int.prettyTime get() = String.format("%04d", this).run {
+        substring(0..1) + ":" + substring(2..3)
+    }
+
+    private fun Calendar.isAfter(time: Int) = get(Calendar.HOUR_OF_DAY) * 100 + get(Calendar.MINUTE) > time
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val departureTime = item.departure_time

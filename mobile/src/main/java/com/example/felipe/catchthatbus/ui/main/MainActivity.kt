@@ -5,11 +5,15 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import com.example.felipe.catchthatbus.R
+import com.example.felipe.catchthatbus.ui.departures.DATE
 import com.example.felipe.catchthatbus.ui.departures.DeparturesFragment
-import com.example.felipe.catchthatbus.ui.departures.TODAY_ONLY
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import java.util.Calendar
+import java.util.GregorianCalendar
 
 class MainActivity : AppCompatActivity() {
+
+    private var date: Calendar = GregorianCalendar()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun createFragment(): Fragment {
         return DeparturesFragment().apply {
             arguments = Bundle().apply {
-                putBoolean(TODAY_ONLY, false)
+                putSerializable(DATE, date)
             }
         }
     }

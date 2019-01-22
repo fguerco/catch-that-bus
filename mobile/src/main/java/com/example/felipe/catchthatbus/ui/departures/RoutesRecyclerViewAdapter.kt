@@ -6,19 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.felipe.catchthatbus.R
-import com.example.felipe.catchthatbus.infrastructure.Services
-import com.example.felipe.catchthatbus.model.BusRoute
+import com.example.felipe.catchthatbus.model.RouteSchedule
 import com.example.felipe.catchthatbus.ui.GridVerticalAutofitLayoutManager
 import kotlinx.android.synthetic.main.routes_view_holder.view.departures_recycler_view
 import kotlinx.android.synthetic.main.routes_view_holder.view.group_route_name
-import java.time.Instant
 
-class RoutesRecyclerViewAdapter(dataset: List<BusRoute>, private val todayOnly: Boolean) :
+class RoutesRecyclerViewAdapter(dataset: List<RouteSchedule>) :
         RecyclerView.Adapter<RoutesRecyclerViewAdapter.ViewHolder>() {
 
     private val data = dataset.toMutableList()
     private val viewPool = RecyclerView.RecycledViewPool()
-    private val repository by lazy { Services.departureRepository }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return LayoutInflater
@@ -29,9 +26,9 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>, private val todayOnly: 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         data[position].let {
-            holder.route.text = holder.itemView.context.getText(it.resId)
+            holder.route.text = holder.itemView.context.getText(it.route.resId)
             holder.recyclerView.apply {
-                adapter = DeparturesRecyclerViewAdapter(it.listDepartures())
+                adapter = DeparturesRecyclerViewAdapter(it.departures)
                 holder.itemView.context.apply {
                     layoutManager = GridVerticalAutofitLayoutManager(this, departuresTextViewWidth)
                 }
@@ -41,8 +38,6 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>, private val todayOnly: 
         }
     }
 
-    private fun BusRoute.listDepartures() = if (todayOnly) repository.departuresToday(this) else repository.allDepartures(this)
-
     override fun getItemCount() = data.size
 
     fun clear() {
@@ -50,7 +45,7 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>, private val todayOnly: 
         notifyDataSetChanged()
     }
 
-    fun putItems(items: List<BusRoute>) {
+    fun putItems(items: List<RouteSchedule>) {
         data.addAll(items)
         notifyDataSetChanged()
     }
@@ -58,8 +53,8 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>, private val todayOnly: 
     private val Context.departuresTextViewWidth get() = resources.getDimension(R.dimen.departure_text_view_width).toInt()
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val recyclerView = item.departures_recycler_view
-        val route = item.group_route_name
+        val recyclerView = item.departures_recycler_view!!
+        val route = item.group_route_name!!
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.felipe.catchthatbus.model
 
+import com.example.felipe.catchthatbus.model.data.allSchedules
+
 class InMemoryScheduleRepository : ScheduleRepository {
-    override fun fetchData(): Sequence<BusSchedule> = allSchedules
+    override fun allSchedules(): Sequence<RouteSchedule> = allSchedules
 }
 
