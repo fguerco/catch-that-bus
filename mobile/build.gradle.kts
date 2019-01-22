@@ -5,7 +5,6 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
-    id("idea")
 }
 
 android {
@@ -13,14 +12,15 @@ android {
 
     defaultConfig {
         applicationId = "com.example.felipe.catchthatbus"
-        minSdkVersion(26)
+        minSdkVersion(23)
         targetSdkVersion(28)
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "0.0.9"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "catch-that-bus-$versionName")
     }
 
-    sourceSets["debug"].java.srcDir("build/generated")
+    sourceSets["debug"].java.srcDir("build/generated/not_namespaced_r_class_sources/debug")
 
     buildTypes["release"].apply {
         isMinifyEnabled = false
@@ -35,7 +35,8 @@ dependencies {
         mapOf("dir" to "libs",
               "include" to listOf("*.jar"))
     ))
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
+    implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1")
     implementation("com.android.support:appcompat-v7:$androidVersion")
     implementation("com.android.support:recyclerview-v7:$androidVersion")
     implementation("com.android.support:design:$androidVersion")
