@@ -5,6 +5,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
+    id("idea")
 }
 
 android {
@@ -19,7 +20,7 @@ android {
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    sourceSets["main"].java.srcDir("build/generated")
+    sourceSets["debug"].java.srcDir("build/generated")
 
     buildTypes["release"].apply {
         isMinifyEnabled = false
