@@ -1,5 +1,6 @@
 package com.example.felipe.catchthatbus.model
 
+import com.example.felipe.catchthatbus.infrastructure.Services
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -11,18 +12,19 @@ import java.util.Calendar
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class BusScheduleTest {
 
+    private val data = Services.scheduleRepository.fetchData()
+
     @Nested
     inner class `Given route is Centro x Barra Bali via L Amarela` {
         private val route = BusRoute.CENTRO_BARRA_BALI_VIA_L_AMARELA
 
         @Nested
         inner class `and the time is 17-1-2018 1430` {
-            private val instant = Calendar.getInstance().run {
+            private val instant = Calendar.getInstance().apply {
                 set(2018, Calendar.JANUARY, 17, 14, 30)
-                toInstant()
             }
 
-            private val subject = route.nextDepartures(instant)
+            private val subject = data.nextDepartures(route, instant).toList()
 
             @Test
             internal fun `nextDepartures() should list 4 departures`() {
@@ -38,12 +40,11 @@ internal class BusScheduleTest {
 
         @Nested
         inner class `and the time is 14-8-2018 1800` {
-            private val instant = Calendar.getInstance().run {
+            private val instant = Calendar.getInstance().apply {
                 set(2018, Calendar.AUGUST, 14, 18, 0)
-                toInstant()
             }
 
-            private val subject = route.nextDepartures(instant)
+            private val subject = data.nextDepartures(route, instant).toList()
 
             @Test
             internal fun `nextDepartures() should list 2 departures`() {
@@ -73,7 +74,7 @@ internal class BusScheduleTest {
 
                 private val time = 1430
 
-                private val subject = route.nextDepartures(day, time)
+                private val subject = data.nextDepartures(route, day, time).toList()
 
                 @Test
                 internal fun `nextDepartures() should list 3 schedules`() {
@@ -97,7 +98,7 @@ internal class BusScheduleTest {
         inner class `and time is 1200` {
             private val time = 1200
 
-            private val subject = day.allDepartures(time)
+            private val subject = data.allDepartures(day, time).toList()
 
             @Test
             internal fun `departuresFromAllAvailableRoutes() should return 3 items`() {
