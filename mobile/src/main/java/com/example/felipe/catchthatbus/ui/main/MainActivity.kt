@@ -1,11 +1,12 @@
 package com.example.felipe.catchthatbus.ui.main
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuItem
 import com.example.felipe.catchthatbus.R
 import com.example.felipe.catchthatbus.ui.departures.DeparturesFragment
+import com.example.felipe.catchthatbus.ui.departures.TODAY_ONLY
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +21,16 @@ class MainActivity : AppCompatActivity() {
     private fun loadFragment() {
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container, DeparturesFragment())
+            .add(R.id.fragment_container, createFragment())
             .commit()
+    }
+
+    private fun createFragment(): Fragment {
+        return DeparturesFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean(TODAY_ONLY, false)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

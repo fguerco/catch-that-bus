@@ -14,18 +14,23 @@ import kotlinx.android.synthetic.main.fragment_departures.routes_recycler_view
 import kotlinx.android.synthetic.main.fragment_departures.view.departures_refresh
 import kotlinx.android.synthetic.main.fragment_departures.view.routes_recycler_view
 
+const val TODAY_ONLY = "todayOnly"
+
 class DeparturesFragment : Fragment() {
 
     private val repository by lazy { Services.departureRepository }
     private val recyclerViewAdater by lazy { routes_recycler_view.adapter as RoutesRecyclerViewAdapter }
 
+    private var todayOnly = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        todayOnly = arguments.todayOnly
 
         return inflater.inflate(R.layout.fragment_departures, container, false).apply {
             routes_recycler_view.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = RoutesRecyclerViewAdapter(fetchData())
+                adapter = RoutesRecyclerViewAdapter(fetchData(), todayOnly)
             }
 
             departures_refresh.setOnRefreshListener(::refresh)
@@ -49,5 +54,7 @@ class DeparturesFragment : Fragment() {
         departures_refresh.isRefreshing = false
     }
 
-    private fun fetchData() = repository.routesToday()
+    private fun fetchData() = if (todayOnly) repository.routesToday() else repository.allRoutes()
+
+    private val Bundle?.todayOnly get() = this?.getBoolean(TODAY_ONLY) ?: true
 }

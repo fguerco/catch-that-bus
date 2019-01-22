@@ -14,6 +14,13 @@ fun Sequence<BusSchedule>.nextDepartures(route: BusRoute, startingFrom: Calendar
     return nextDepartures(route, startingFrom.dayOfWeek, startingFrom.intTime)
 }
 
+fun Sequence<BusSchedule>.allDepartures(): Sequence<BusDeparture> {
+    return flatMap { schedule ->
+        schedule.departures.asSequence()
+        .map { BusDeparture(schedule.route, it) }
+    }
+}
+
 fun Sequence<BusSchedule>.allDepartures(day: Int, time: Int): Sequence<BusDeparture> {
     return filter { it.days.contains(day) }
         .flatMap { schedule ->

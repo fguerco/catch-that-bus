@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.routes_view_holder.view.departures_recycle
 import kotlinx.android.synthetic.main.routes_view_holder.view.group_route_name
 import java.time.Instant
 
-class RoutesRecyclerViewAdapter(dataset: List<BusRoute>) :
+class RoutesRecyclerViewAdapter(dataset: List<BusRoute>, private val todayOnly: Boolean) :
         RecyclerView.Adapter<RoutesRecyclerViewAdapter.ViewHolder>() {
 
     private val data = dataset.toMutableList()
@@ -31,7 +31,7 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>) :
         data[position].let {
             holder.route.text = holder.itemView.context.getText(it.resId)
             holder.recyclerView.apply {
-                adapter = DeparturesRecyclerViewAdapter(repository.departuresToday(it))
+                adapter = DeparturesRecyclerViewAdapter(it.listDepartures())
                 holder.itemView.context.apply {
                     layoutManager = GridVerticalAutofitLayoutManager(this, departuresTextViewWidth)
                 }
@@ -40,6 +40,8 @@ class RoutesRecyclerViewAdapter(dataset: List<BusRoute>) :
             }
         }
     }
+
+    private fun BusRoute.listDepartures() = if (todayOnly) repository.departuresToday(this) else repository.allDepartures(this)
 
     override fun getItemCount() = data.size
 
