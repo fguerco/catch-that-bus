@@ -1,5 +1,6 @@
 package com.example.felipe.catchthatbus.ui.departures
 
+import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,7 @@ class DeparturesRecyclerViewAdapter(dataset: List<Int>) :
         holder.departureTime.text = data[position].prettyTime
 
         if (today.isAfter(data[position]))
-            holder.departureTime.setTextAppearance(R.style.text_unavailable_time)
+            TextViewCompat.setTextAppearance(holder.departureTime, R.style.text_unavailable_time)
     }
 
     override fun getItemCount() = data.size
@@ -47,7 +48,7 @@ class DeparturesRecyclerViewAdapter(dataset: List<Int>) :
     private fun Calendar.isAfter(time: Int) = get(Calendar.HOUR_OF_DAY) * 100 + get(Calendar.MINUTE) > time
 
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
-        val departureTime = item.departure_time
+        val departureTime = item.departure_time!!
     }
 
 }
