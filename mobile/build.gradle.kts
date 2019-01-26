@@ -42,6 +42,8 @@ dependencies {
     implementation("com.android.support:design:$androidVersion")
     implementation("com.android.support.constraint:constraint-layout:1.1.3")
     implementation("com.android.support:support-annotations:$androidVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.8")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.2")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")

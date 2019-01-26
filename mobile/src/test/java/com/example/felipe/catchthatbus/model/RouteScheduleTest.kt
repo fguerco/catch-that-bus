@@ -1,6 +1,6 @@
 package com.example.felipe.catchthatbus.model
 
-import com.example.felipe.catchthatbus.infrastructure.Services
+import com.example.felipe.catchthatbus.model.data.allSchedules
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -12,7 +12,7 @@ import java.util.GregorianCalendar
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class RouteScheduleTest {
 
-    private val data = Services.scheduleRepository.allSchedules()
+    private val data = allSchedules
 
     @Nested
     inner class `Given the date is Wed 17-1-2018` {

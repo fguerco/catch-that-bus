@@ -1,5 +1,6 @@
-package com.example.felipe.catchthatbus.model
+package com.example.felipe.catchthatbus.infrastructure.repository
 
+import com.example.felipe.catchthatbus.model.routesOf
 import java.util.Calendar
 
 class DepartureRepository(private val scheduleRepository: ScheduleRepository) {
