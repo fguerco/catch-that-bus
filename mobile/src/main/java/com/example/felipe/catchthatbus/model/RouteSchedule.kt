@@ -1,10 +1,15 @@
 package com.example.felipe.catchthatbus.model
 
-import java.util.Calendar
+import com.example.felipe.catchthatbus.infrastructure.asTypedList
 
-data class RouteSchedule(val route: BusRoute, val days: List<Int>, val departures: List<Int>)
+const val ROUTE_KEY = "route"
+const val DAYS_KEY = "days"
+const val DEPARTURES_KEY = "departures"
 
+data class RouteSchedule(val route: BusRoute, val days: List<Int>, val departures: List<Int>) {
 
-fun Sequence<RouteSchedule>.routesOf(date: Calendar) = filter { it.days.contains(date.dayOfWeek) }
+    constructor(data: Map<String, Any>) : this(data[ROUTE_KEY].asBusRoute(),
+                                               data[DAYS_KEY].asTypedList(),
+                                               data[DEPARTURES_KEY].asTypedList())
 
-private val Calendar.dayOfWeek get() = get(Calendar.DAY_OF_WEEK)
+}
