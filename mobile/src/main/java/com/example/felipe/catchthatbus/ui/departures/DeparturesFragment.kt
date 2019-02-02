@@ -21,7 +21,7 @@ const val DATE = "date"
 class DeparturesFragment : Fragment() {
 
     private val repository by lazy { Services.departureRepository }
-    private val recyclerViewAdater by lazy { routes_recycler_view.adapter as RoutesRecyclerViewAdapter }
+    private val recyclerViewAdapter by lazy { routes_recycler_view.adapter as RoutesRecyclerViewAdapter }
 
     private var date: Calendar = arguments?.getSerializable(DATE) as? Calendar ?: GregorianCalendar()
 
@@ -49,7 +49,7 @@ class DeparturesFragment : Fragment() {
     private fun refresh() {
         departures_refresh.isRefreshing = true
         date = GregorianCalendar()
-        recyclerViewAdater.apply {
+        recyclerViewAdapter.apply {
             clear()
             putItems(fetchData())
         }

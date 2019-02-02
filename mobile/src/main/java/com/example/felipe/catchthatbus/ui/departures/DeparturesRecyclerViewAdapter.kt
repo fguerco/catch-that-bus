@@ -23,10 +23,12 @@ class DeparturesRecyclerViewAdapter(dataset: List<Int>) :
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.departureTime.text = data[position].prettyTime
+        val alpha = if (today.isAfter(data[position])) 50 else 190
 
-        if (today.isAfter(data[position]))
-            TextViewCompat.setTextAppearance(holder.departureTime, R.style.text_unavailable_time)
+        holder.departureTime.apply {
+            text = data[position].prettyTime
+            setTextColor(textColors.withAlpha(alpha))
+        }
     }
 
     override fun getItemCount() = data.size
