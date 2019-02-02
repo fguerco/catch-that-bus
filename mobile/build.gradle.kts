@@ -52,6 +52,7 @@ dependencies {
     implementation("com.android.support.constraint:constraint-layout:1.1.3")
     implementation("com.android.support:support-annotations:$androidVersion")
     implementation("org.yaml:snakeyaml:1.23")
+    implementation("org.greenrobot:eventbus:3.1.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")

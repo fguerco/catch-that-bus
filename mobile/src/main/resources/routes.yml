@@ -32,12 +32,8 @@
 
 - route: CIRCULAR_BARRA
   days: [7]
-  departures: [930, 1400, 1800]
+  departures: [930, 1130, 1400, 1600, 1800]
 
 - route: CIRCULAR_RECREIO
   days: [2, 3, 4, 5, 6]
   departures: [630, 1245]
-
-- route: CIRCULAR_RECREIO
-  days: [7]
-  departures: [1130, 1600]

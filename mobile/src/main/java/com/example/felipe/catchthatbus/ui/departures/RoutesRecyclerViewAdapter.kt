@@ -10,8 +10,9 @@ import com.example.felipe.catchthatbus.model.RouteSchedule
 import com.example.felipe.catchthatbus.ui.GridVerticalAutofitLayoutManager
 import kotlinx.android.synthetic.main.routes_view_holder.view.departures_recycler_view
 import kotlinx.android.synthetic.main.routes_view_holder.view.group_route_name
+import java.util.Calendar
 
-class RoutesRecyclerViewAdapter(dataset: List<RouteSchedule>) :
+class RoutesRecyclerViewAdapter(dataset: List<RouteSchedule>, private val date: Calendar) :
         RecyclerView.Adapter<RoutesRecyclerViewAdapter.ViewHolder>() {
 
     private val data = dataset.toMutableList()
@@ -28,7 +29,7 @@ class RoutesRecyclerViewAdapter(dataset: List<RouteSchedule>) :
         data[position].let {
             holder.route.text = holder.itemView.context.getText(it.route.resId)
             holder.recyclerView.apply {
-                adapter = DeparturesRecyclerViewAdapter(it.departures)
+                adapter = DeparturesRecyclerViewAdapter(it.departures, date)
                 holder.itemView.context.apply {
                     layoutManager = GridVerticalAutofitLayoutManager(this, departuresTextViewWidth)
                 }
@@ -45,7 +46,8 @@ class RoutesRecyclerViewAdapter(dataset: List<RouteSchedule>) :
         notifyDataSetChanged()
     }
 
-    fun putItems(items: List<RouteSchedule>) {
+    fun updateData(newDate: Calendar, items: List<RouteSchedule>) {
+        date.timeInMillis = newDate.timeInMillis
         data.addAll(items)
         notifyDataSetChanged()
     }

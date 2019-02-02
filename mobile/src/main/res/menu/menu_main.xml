@@ -3,11 +3,11 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.felipe.catchthatbus.ui.main.MainActivity">
 
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+    <item android:id="@+id/action_calendar"
+          android:title="@string/action_calendar"
           android:orderInCategory="100"
-          app:showAsAction="never"
-          android:visible="false" />
+          android:icon="@drawable/ic_outline_calendar"
+          app:showAsAction="ifRoom" />
 
     <item android:id="@+id/menu_refresh"
           android:title="@string/action_refresh"
