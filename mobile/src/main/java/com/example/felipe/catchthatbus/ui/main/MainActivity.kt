@@ -64,7 +64,7 @@ class MainActivity : EventBusActivity() {
     }
 
     private fun pickDate() {
-        DatePickerDialog(this, datePickListener, date.year, date.month, date.dayOfMonth).show()
+        DatePickerDialog(this, R.style.AppDatePicker, datePickListener, date.year, date.month, date.dayOfMonth).show()
     }
 
     private fun setToolbarSubtitle(date: Calendar) {
